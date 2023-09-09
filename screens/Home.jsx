@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Button} from 'react-native'
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './home.style'
@@ -14,10 +14,14 @@ const Home = () => {
 
     return (
         <SafeAreaView>
-            <View style = {styles.appBarWrapper}>
-                <View style={styles.appBar}>
-                    
-                </View>
+            <View style = {styles.headerContainer}>
+                <Text style ={styles.headerStyle}> 3SONGS </Text>
+            </View>
+
+            <View style = {styles.buttonContainer}>
+                <TouchableOpacity style = {styles.buttonStyle}>
+                    <Text style = {styles.buttonText}> Reroll </Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
