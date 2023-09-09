@@ -8,6 +8,7 @@ import { useCallback } from 'react';
 import BottomTabNavigation from "./navigation/BottomTabNavigation";
 import LoginScreen from "./screens/LoginScreen";
 import RegistrationScreen from "./screens/RegistrationScreen";
+import { Cart } from './screens';
 
 
 const Stack = createNativeStackNavigator();
@@ -50,21 +51,14 @@ export default function App() {
           component = {BottomTabNavigation}
           options={{headerShown: false}}
           />
+          <Stack.Screen
+          name = 'Cart'
+          component = {Cart}
+          options={{headerShown: false}}
+          />
       </Stack.Navigator>
 
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textStyle: {
-    fontFamily: "extrabold",
-    fontSize: 20,
-  }
-});
