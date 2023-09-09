@@ -5,9 +5,42 @@ import {
     TextInput,
     TouchableOpacity,
   } from 'react-native';
-  import React from 'react'
+  import React, { useState } from 'react'
+import { FIREBASE_AUTH } from '../Firebase/firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginScreen = ({navigation}) => {
+    const[email, setEmail] = useState('');
+    const[password, setPassword] = useState('');
+    const[loading, setLoading] = useState('');
+    const auth = FIREBASE_AUTH;
+
+    const signIn = async() => {
+        setLoading(true);
+        try {
+            const response = await signInWithEmailAndPassword(auth, email, password);
+            navigation.navigate("Bottom Navigation");
+            // alert(response.toString());
+        } catch (error){
+            console.log(error);
+            alert("Sign in failed!");
+        } finally {
+            setLoading(false);
+        }
+        // navigation.navigate("Bottom Navigation");
+    }
+
+    const signUp = async() => {
+        setLoading(true);
+        try {
+            const response = await createUserWithEmailAndPassword(auth, email, password);
+        } catch {
+            console.log(error);
+            alert("Registration failed!");
+        } finally {
+            setLoading(false);
+        }
+    }
     return (
         <View>
             <View>
@@ -32,6 +65,9 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     placeholder="email"
                     keyboardType="email-address"
+                    autoCapitalize={false}
+                    onChangeText= {(text) => setEmail(text)}
+
                 />
             </View>
             <View style = {{
@@ -43,11 +79,13 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     placeholder="password"
                     secureTextEntry={true}
+                    autoCapitalize = {false}
+                    onChangeText= {(text) => setPassword(text)}
                 />
             </View>
             
             <TouchableOpacity
-                onPress={() => navigation.navigate('Bottom Navigation')}
+                onPress={signIn}
                 style={{
                     backgroundColor: '#AD40AF',
                     padding: 20,
@@ -64,17 +102,25 @@ const LoginScreen = ({navigation}) => {
                     Login
                 </Text>
             </TouchableOpacity>
-            <View
+            <TouchableOpacity
+                onPress={signUp}
                 style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
+                    backgroundColor: '#AD40AF',
+                    padding: 20,
+                    borderRadius: 10,
                     marginBottom: 30,
                 }}>
-                <Text>New to the app?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                    <Text style={{color: '#AD40AF', fontWeight: '700'}}> Register</Text>
-                </TouchableOpacity>
-            </View>
+                <Text
+                    style={{
+                    textAlign: 'center',
+                    fontWeight: '700',
+                    fontSize: 16,
+                    color: '#fff',
+                    }}>
+                    Register
+                </Text>
+            </TouchableOpacity>
+
 
         </View>
     )
