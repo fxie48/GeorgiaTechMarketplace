@@ -18,6 +18,7 @@ const BottomTabNavigation = () => {
             screenOptions = {({route}) => ({
                 tabBarHideOnKeyboard: true,
                 tabBarIcon: ({focused, color, size}) => {
+                    console.log(focused);
                     let iconName;
                     let routeName = route.name;
 
