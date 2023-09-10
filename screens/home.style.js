@@ -21,15 +21,20 @@ const styles = StyleSheet.create({
         marginTop: 60,
     },
     title: {
+        fontFamily: 'Times New Roman',
         fontSize: 38,
+        marginTop: 150,
         alignSelf: "center",
         marginBottom: 20,
+        color: '#197FF6',
     },
-    pokemonContainer: { backgroundColor: "lightgrey", marginTop: 10 },
+    pokemonContainer: { marginTop: 10 },
     pokemonTitle: {
-        fontSize: 32,
+        fontFamily: 'Times New Roman',
+        fontSize: 25,
         alignSelf: "center",
         marginTop: 10,
+        color: '#197FF6',
     },
     pokemonSprite: {
         width: 200,

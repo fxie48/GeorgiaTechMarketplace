@@ -1,7 +1,7 @@
 import styles from './home.style'
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useCallback, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, Image } from "react-native";
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity} from "react-native";
 
 const pokePath = "https://pokeapi.co/api/v2/";
 const pokeQuery = "pokemon?limit=151&offset=0";
@@ -47,9 +47,28 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>First Gen Pokemons</Text>
+      <Text style={styles.title}>You encountered a...</Text>
       <FlatList data={firstGenPokemonDetails} renderItem={renderPokemon} />
       <StatusBar style="auto" />
+      <TouchableOpacity
+        style={{
+            backgroundColor: '#AD40AF',
+            padding: 15,
+            borderRadius: 10,
+            marginBottom: 150,
+            marginHorizontal: 80,
+            backgroundColor: "#197FF6",
+        }}>
+        <Text
+            style={{
+            textAlign: 'center',
+            fontWeight: '700',
+            fontSize: 16,
+            color: '#fff',
+            }}>
+            Find New Pokemon
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
