@@ -55,6 +55,7 @@ const Profile = () => {
           <View>
             <Text
                 style={{
+                    paddingHorizontal: 100,
                     textAlign: "center",
                     fontFamily: 'Times New Roman',
                     fontSize: 20,
