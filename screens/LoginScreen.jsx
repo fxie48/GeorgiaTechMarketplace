@@ -8,8 +8,7 @@ import {
   import React, { useState } from 'react'
 import { FIREBASE_AUTH, FIREBASE_DB } from '../Firebase/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
-import firebase from "firebase/app"
+import { doc, setDoc } from 'firebase/firestore';
 
 const LoginScreen = ({navigation}) => {
     const[email, setEmail] = useState('');
@@ -22,14 +21,13 @@ const LoginScreen = ({navigation}) => {
         try {
             const response = await signInWithEmailAndPassword(auth, email, password);
             navigation.navigate("Bottom Navigation");
-            // alert(response.toString());
         } catch (error){
             console.log(error);
             alert("Sign in failed!");
         } finally {
             setLoading(false);
         }
-        // navigation.navigate("Bottom Navigation");
+
     }
 
     const signUp = async() => {
