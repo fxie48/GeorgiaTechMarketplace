@@ -1,14 +1,13 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {Home, Search, Profile} from '../screens';
+import {Home, Profile} from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
 const homeName = 'Home';
 const profileName = 'Profile';
-const searchName = 'Search'
 
 const BottomTabNavigation = () => {
     console.log("rerendering")
@@ -25,8 +24,6 @@ const BottomTabNavigation = () => {
                         iconName = focused ? "home" : "home-outline"
                     } else if (routeName === profileName) {
                         iconName = focused ? "person" : "person-outline"
-                    } else {
-                        iconName = "search-sharp"
                     }
 
                 return <Ionicons name={iconName} size={size} color={color}/>
@@ -38,7 +35,6 @@ const BottomTabNavigation = () => {
         })}>
             
             <Tab.Screen name={homeName} component={Home} options={{headerShown: false}}/>
-            <Tab.Screen name={searchName} component={Search} options={{headerShown: false}}/>
             <Tab.Screen name={profileName} component={Profile} options={{headerShown: false}}/>
         </Tab.Navigator>
 

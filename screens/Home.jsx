@@ -1,9 +1,9 @@
 import styles from './home.style'
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useCallback, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity} from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, FlatList, Image, TouchableOpacity} from "react-native";
 import { FIREBASE_AUTH, FIREBASE_DB } from '../Firebase/firebase';
-import { doc, getDoc, updateDoc, collection, query, where } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 
 const pokePath = "https://pokeapi.co/api/v2/";
