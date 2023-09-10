@@ -50,7 +50,7 @@ const LoginScreen = ({navigation}) => {
         //const uid = user.uid;
         const data = {
             email: email,
-            pokemonTeam: []
+            pokemonTeam: ['testPokemon']
         }
         const collectionRef = doc(FIREBASE_DB, 'users', userID);
         setDoc(collectionRef, data)

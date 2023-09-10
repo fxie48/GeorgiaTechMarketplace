@@ -18,19 +18,15 @@ const BottomTabNavigation = () => {
             screenOptions = {({route}) => ({
                 tabBarHideOnKeyboard: true,
                 tabBarIcon: ({focused, color, size}) => {
-                    console.log(focused);
                     let iconName;
                     let routeName = route.name;
 
                     if (routeName === homeName) {
                         iconName = focused ? "home" : "home-outline"
-                        console.log(iconName);
                     } else if (routeName === profileName) {
                         iconName = focused ? "person" : "person-outline"
-                        console.log(iconName);
                     } else {
                         iconName = "search-sharp"
-                        console.log(iconName);
                     }
 
                 return <Ionicons name={iconName} size={size} color={color}/>

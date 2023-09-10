@@ -16,10 +16,10 @@ const Profile = () => {
             const collectionRef = collection(FIREBASE_DB, 'users');
             const q = query(collectionRef, where('__name__', '==', user.uid));
             const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                console.log(doc.data());
-                setData(doc.data()['pokemonTeam'])
-              });
+            
+            const doc = querySnapshot.docs[0];
+            setData(doc.data()['pokemonTeam'])
+            console.log('displaying pokemon')
         }
 
       } catch (error) {
@@ -31,18 +31,20 @@ const Profile = () => {
   }, []);
 
   return (
-    <View>
-      <Text>Data:</Text>
-      <FlatList
-        data={Object.entries(data)}
-        keyExtractor={(item) => item[0]}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item[0]}: {item[1]}</Text>
-          </View>
-        )}
-      />
-    </View>
+    <SafeAreaView>
+        <View>
+            <Text>My Pokemon:</Text>
+            <FlatList
+            data={Object.entries(data)}
+            keyExtractor={(item) => item[0]}
+            renderItem={({ item }) => (
+                <View>
+                <Text>{item[0]}: {item[1]}</Text>
+                </View>
+            )}
+            />
+        </View>
+    </SafeAreaView>
   );
 };
 
