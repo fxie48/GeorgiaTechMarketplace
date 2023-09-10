@@ -65,16 +65,27 @@ const LoginScreen = ({navigation}) => {
     return (
         <View>
             <View>
-            <Text
-                style={{
-                    // fontFamily: 'Roboto-Medium',
-                    fontSize: 28,
-                    fontWeight: '500',
-                    color: '#333',
-                    marginBottom: 30,
-                }}>
-                Login
-            </Text>
+                <Text
+                    style={{
+                        fontFamily: 'Times New Roman',
+                        fontSize: 40,
+                        marginTop: 200,
+                        marginBottom: 10,
+                        textAlign: 'center',
+                        color: '#197FF6',
+                    }}>
+                    Catch 'Em All!
+                </Text>
+                <Text
+                    style={{
+                        fontFamily: 'Times New Roman',
+                        fontSize: 17,
+                        marginBottom: 50,
+                        textAlign: 'center',
+                        color: '#197FF6',
+                    }}>
+                    a game to get catch all Pokemon
+                </Text>
             </View>
 
             <View style = {{
@@ -82,6 +93,7 @@ const LoginScreen = ({navigation}) => {
                 borderBottomColor:'#ccc', 
                 borderBottomWidth:1,
                 paddingBottom: 8,
+                marginHorizontal: 40,
                 marginBottom: 25}}>
                 <TextInput
                     placeholder="email"
@@ -96,7 +108,8 @@ const LoginScreen = ({navigation}) => {
                 borderBottomColor:'#ccc', 
                 borderBottomWidth:1,
                 paddingBottom: 8,
-                marginBottom: 8}}>
+                marginBottom: 50,
+                marginHorizontal: 40}}>
                 <TextInput
                     placeholder="password"
                     secureTextEntry={true}
@@ -109,9 +122,11 @@ const LoginScreen = ({navigation}) => {
                 onPress={signIn}
                 style={{
                     backgroundColor: '#AD40AF',
-                    padding: 20,
+                    padding: 15,
                     borderRadius: 10,
-                    marginBottom: 30,
+                    marginBottom: 15,
+                    marginHorizontal: 80,
+                    backgroundColor: "#197FF6",
                 }}>
                 <Text
                     style={{
@@ -127,9 +142,11 @@ const LoginScreen = ({navigation}) => {
                 onPress={signUp}
                 style={{
                     backgroundColor: '#AD40AF',
-                    padding: 20,
+                    padding: 15,
                     borderRadius: 10,
                     marginBottom: 30,
+                    marginHorizontal: 80,
+                    backgroundColor: "#197FF6",
                 }}>
                 <Text
                     style={{
@@ -141,8 +158,6 @@ const LoginScreen = ({navigation}) => {
                     Register
                 </Text>
             </TouchableOpacity>
-
-
         </View>
     )
 }
