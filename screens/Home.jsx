@@ -1,7 +1,7 @@
 import styles from './home.style'
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useCallback, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, FlatList, Image, TouchableOpacity } from "react-native";
 
 const pokePath = "https://pokeapi.co/api/v2/";
 const pokeQuery = "pokemon?limit=151&offset=0";
