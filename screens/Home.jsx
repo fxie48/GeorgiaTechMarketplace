@@ -1,14 +1,18 @@
 import styles from './home.style'
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useCallback, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity} from "react-native";
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from "react-native";
 
 const pokePath = "https://pokeapi.co/api/v2/";
 const pokeQuery = "pokemon?limit=151&offset=0";
-const randomNumber = Math.floor(Math.random() * 151) + 1;
 
 export default function App() {
   const [firstGenPokemonDetails, setfirstGenPokemonDetails] = useState([]);
+  const [randomNumber, setrandomNumber] = useState(1);
+
+  useEffect(() => {
+    setfirstGenPokemonDetails(firstGenPokemonDetails);
+  }, [randomNumber]);
 
   useEffect(() => {
     const fetchFirstGenPokemons = async () => {
@@ -23,7 +27,7 @@ export default function App() {
         })
       );
 
-      setfirstGenPokemonDetails(firstGenPokemonDetails.slice(randomNumber, randomNumber + 1));
+      setfirstGenPokemonDetails(firstGenPokemonDetails);
     };
 
     fetchFirstGenPokemons();
@@ -45,12 +49,17 @@ export default function App() {
     );
   };
 
+  function refreshPage() {
+    setrandomNumber(Math.floor(Math.random() * 151) + 1);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>You encountered a...</Text>
-      <FlatList data={firstGenPokemonDetails} renderItem={renderPokemon} />
+      <FlatList data={firstGenPokemonDetails.slice(randomNumber, randomNumber + 1)} renderItem={renderPokemon} />
       <StatusBar style="auto" />
       <TouchableOpacity
+        onPress={refreshPage}
         style={{
             backgroundColor: '#AD40AF',
             padding: 15,
