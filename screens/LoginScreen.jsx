@@ -8,7 +8,8 @@ import {
   import React, { useState } from 'react'
 import { FIREBASE_AUTH, FIREBASE_DB } from '../Firebase/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
+import firebase from "firebase/app"
 
 const LoginScreen = ({navigation}) => {
     const[email, setEmail] = useState('');
@@ -46,15 +47,15 @@ const LoginScreen = ({navigation}) => {
     }
 
     const writeUserData = async (userID) => {
+        //const uid = user.uid;
         const data = {
             email: email,
             pokemonTeam: []
         }
-
-        const collectionRef = collection(FIREBASE_DB, 'users');
-        addDoc(collectionRef, data)
+        const collectionRef = doc(FIREBASE_DB, 'users', userID);
+        setDoc(collectionRef, data)
           .then((docRef) => {
-            console.log('Document written with ID: ', docRef.id);
+            console.log('Document written with ID: ', userID);
           })
           .catch((error) => {
             console.error('Error adding document: ', error);
@@ -97,7 +98,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     placeholder="email"
                     keyboardType="email-address"
-                    autoCapitalize={false}
+                    // autoCapitalize={false}
                     onChangeText= {(text) => setEmail(text)}
 
                 />
@@ -112,7 +113,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     placeholder="password"
                     secureTextEntry={true}
-                    autoCapitalize = {false}
+                    // autoCapitalize = {false}
                     onChangeText= {(text) => setPassword(text)}
                 />
             </View>
