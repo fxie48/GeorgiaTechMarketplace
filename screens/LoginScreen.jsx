@@ -6,8 +6,9 @@ import {
     TouchableOpacity,
   } from 'react-native';
   import React, { useState } from 'react'
-import { FIREBASE_AUTH } from '../Firebase/firebase';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../Firebase/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { collection, addDoc } from 'firebase/firestore';
 
 const LoginScreen = ({navigation}) => {
     const[email, setEmail] = useState('');
@@ -32,15 +33,33 @@ const LoginScreen = ({navigation}) => {
 
     const signUp = async() => {
         setLoading(true);
-        try {
-            const response = await createUserWithEmailAndPassword(auth, email, password);
-        } catch {
-            console.log(error);
+            createUserWithEmailAndPassword(auth, email, password).then(userCredential => {
+                var userID = userCredential.user.uid;
+                setEmail(email);
+                writeUserData(userID);
+            })
+            .catch(error => {
+                console.log(error);
             alert("Registration failed!");
-        } finally {
-            setLoading(false);
-        }
+            })
+        setLoading(false);
     }
+
+    const writeUserData = async (userID) => {
+        const data = {
+            email: email
+        }
+        
+        const collectionRef = collection(FIREBASE_DB, 'users');
+        addDoc(collectionRef, data)
+          .then((docRef) => {
+            console.log('Document written with ID: ', docRef.id);
+          })
+          .catch((error) => {
+            console.error('Error adding document: ', error);
+          });
+    }
+
     return (
         <View>
             <View>
@@ -65,7 +84,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     placeholder="email"
                     keyboardType="email-address"
-                    autoCapitalize={false}
+                    //autoCapitalize={false}
                     onChangeText= {(text) => setEmail(text)}
 
                 />
@@ -79,7 +98,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     placeholder="password"
                     secureTextEntry={true}
-                    autoCapitalize = {false}
+                    //autoCapitalize = {false}
                     onChangeText= {(text) => setPassword(text)}
                 />
             </View>
