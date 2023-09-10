@@ -47,9 +47,10 @@ const LoginScreen = ({navigation}) => {
 
     const writeUserData = async (userID) => {
         const data = {
-            email: email
+            email: email,
+            pokemonTeam: []
         }
-        
+
         const collectionRef = collection(FIREBASE_DB, 'users');
         addDoc(collectionRef, data)
           .then((docRef) => {
@@ -84,7 +85,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     placeholder="email"
                     keyboardType="email-address"
-                    //autoCapitalize={false}
+                    autoCapitalize={false}
                     onChangeText= {(text) => setEmail(text)}
 
                 />
@@ -98,7 +99,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                     placeholder="password"
                     secureTextEntry={true}
-                    //autoCapitalize = {false}
+                    autoCapitalize = {false}
                     onChangeText= {(text) => setPassword(text)}
                 />
             </View>
