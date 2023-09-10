@@ -1,15 +1,49 @@
-import {StyleSheet, Text, View} from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { firebase, FirebaseError } from 'firebase/app';
+import React, { useEffect, useState } from 'react';
+import { Text, View, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../Firebase/firebase';
+import { collection, getDoc, doc, getDocs, query, where} from 'firebase/firestore';
 
 const Profile = () => {
-    return (
-        <SafeAreaView>
-            <Text> Profile </Text>
-        </SafeAreaView>
-    )
-}
+  const [data, setData] = useState([]);
+  const user = FIREBASE_AUTH.currentUser;
 
-export default Profile
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (user) {
+            const collectionRef = collection(FIREBASE_DB, 'users');
+            const q = query(collectionRef, where('__name__', '==', user.uid));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data());
+                setData(doc.data()['pokemonTeam'])
+              });
+        }
 
-const styles = StyleSheet.create({})
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <View>
+      <Text>Data:</Text>
+      <FlatList
+        data={Object.entries(data)}
+        keyExtractor={(item) => item[0]}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item[0]}: {item[1]}</Text>
+          </View>
+        )}
+      />
+    </View>
+  );
+};
+
+export default Profile;
