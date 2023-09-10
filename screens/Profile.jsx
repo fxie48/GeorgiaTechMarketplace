@@ -31,14 +31,37 @@ const Profile = () => {
   }, []);
 
   return (
-    <View>
-      <Text>Data:</Text>
+    <View style={{
+        flexDirection: "column",
+        alignItems: "center",
+    }}>
+      <Text
+        style={{
+            padding: 15,
+            marginTop: 100,
+            marginBottom: 40,
+            flexDirection: "column",
+            alignItems: "center",
+            color: "#197FF6",
+            fontWeight: "bold",
+            fontFamily: 'Times New Roman',
+            fontSize: 40
+        }}>
+        Pokemon Caught</Text>
       <FlatList
         data={Object.entries(data)}
         keyExtractor={(item) => item[0]}
         renderItem={({ item }) => (
           <View>
-            <Text>{item[0]}: {item[1]}</Text>
+            <Text
+                style={{
+                    textAlign: "center",
+                    fontFamily: 'Times New Roman',
+                    fontSize: 30,
+                    marginBottom: 15,
+                    color: "#197FF6",
+                }}
+            >{item[1]}</Text>
           </View>
         )}
       />
