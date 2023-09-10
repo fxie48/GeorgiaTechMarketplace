@@ -17,7 +17,6 @@ const Profile = () => {
             const q = query(collectionRef, where('__name__', '==', user.uid));
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
-                console.log(doc.data());
                 setData(doc.data()['pokemonTeam'])
               });
         }
@@ -34,12 +33,13 @@ const Profile = () => {
     <View style={{
         flexDirection: "column",
         alignItems: "center",
+        flex: 1,
     }}>
       <Text
         style={{
             padding: 15,
             marginTop: 100,
-            marginBottom: 40,
+            marginBottom: 15,
             flexDirection: "column",
             alignItems: "center",
             color: "#197FF6",
@@ -57,8 +57,8 @@ const Profile = () => {
                 style={{
                     textAlign: "center",
                     fontFamily: 'Times New Roman',
-                    fontSize: 30,
-                    marginBottom: 15,
+                    fontSize: 20,
+                    marginBottom: 5,
                     color: "#197FF6",
                 }}
             >{item[1]}</Text>

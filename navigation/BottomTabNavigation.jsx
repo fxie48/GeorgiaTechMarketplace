@@ -10,7 +10,6 @@ const homeName = 'Home';
 const profileName = 'Profile';
 
 const BottomTabNavigation = () => {
-    console.log("rerendering")
     return (
         <Tab.Navigator
             initialRouteName={homeName}
@@ -38,7 +37,7 @@ const BottomTabNavigation = () => {
         })}>
             
             <Tab.Screen name={homeName} component={Home} options={{headerShown: false}}/>
-            <Tab.Screen name={profileName} component={Profile} options={{headerShown: false}}/>
+            <Tab.Screen name={profileName} component={Profile} options={{headerShown: false, unmountOnBlur: true}}/>
         </Tab.Navigator>
 
     );
