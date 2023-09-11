@@ -23,7 +23,11 @@ const LoginScreen = ({navigation}) => {
             navigation.navigate("Bottom Navigation");
         } catch (error){
             console.log(error);
-            alert("Sign in failed!");
+            if (error.code === "auth/wrong-password") alert("Login failed: Wrong password!");
+            else if (error.code === "auth/missing-password") alert("Login failed: Missing password!");
+            else if (error.code === "auth/invalid-email") alert("Login failed: Invalid email!");
+            else if (error.code === "auth/user-not-found") alert("Login failed: Email not found!");
+            else alert("Login failed!");
         } finally {
             setLoading(false);
         }
@@ -38,8 +42,13 @@ const LoginScreen = ({navigation}) => {
                 writeUserData(userID);
             })
             .catch(error => {
+                if (error.code === "auth/invalid-email") alert("Registation failed: Invalid email!");
+                else if (error.code === "auth/missing-password") alert("Registration failed: Missing password!");
+                else if (error.code === "auth/missing-email") alert("Registration failed: Missing email!");
+                else if (error.code === "auth/weak-password") alert("Registration failed: Password must be 6 characters!");
+                else if (error.code === "auth/email-already-in-use") alert("Registration failed: Email already taken!");
+                else alert("Registration failed!");
                 console.log(error);
-            alert("Registration failed!");
             })
         setLoading(false);
     }
