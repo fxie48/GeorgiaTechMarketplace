@@ -91,7 +91,7 @@ const LoginScreen = ({navigation}) => {
                         textAlign: 'center',
                         color: '#197FF6',
                     }}>
-                    a game to get catch all Pokemon
+                    a game to catch all Pokemon
                 </Text>
             </View>
 
